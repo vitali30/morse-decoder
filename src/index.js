@@ -38,9 +38,24 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let arrayAll = expr.match(/.{1,10}/g)
+    let arrayEl = []
+    let letter = '';
+    let word = '';
+    for (let element of arrayAll){
+        if (element == "**********") word = word + " ";
+        else {arrayEl = element.match(/.{1,2}/g)
+            for (let element of arrayEl){
+                if(element == 00) letter = letter + ''
+                else if (element == 10) letter = letter + '.'
+                else if (element == 11) letter = letter + '-'
+            }
+            word = word + MORSE_TABLE[letter];
+        }
+        letter = ''
+    }
+    return(word);
 }
-
 module.exports = {
     decode
 }
